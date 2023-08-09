@@ -1,31 +1,3 @@
-<<<<<<< HEAD
-import React from "react";
-import "./Notifications.css";
-import closeIcon from "../assets/close-icon.png";
-import { getLatestNotification } from "../utils/utils";
-import NotificationItem from "./NotificationItem";
-
-function Notifications() {
-  return (
-    <div className="Notifications">
-      <button
-        style={{ color: "#3a3a3a", fontWeight: "bold", background: "none", border: "none", fontSize: "10px", position: "absolute", right: "2px", top: "2px", cursor: "pointer" }}
-        aria-label="Close"
-        onClick={console.log("Close button has been clicked")}
-      >
-        <img src={closeIcon} alt="closeIcon" width="10px" />
-      </button>
-      <p>Here is the list of notifications</p>
-      <ul>
-        <NotificationItem type="default" value="New course available" />
-        <NotificationItem type="urgent" value="New resume available" />
-        <NotificationItem type="urgent" html={getLatestNotification()} />
-      </ul>
-    </div>
-  );
-}
-
-=======
 import React, { Component } from "react";
 import "./Notifications.css";
 import closeIcon from "../assets/close-icon.png";
@@ -38,6 +10,10 @@ class Notifications extends Component {
     super(props);
 
     this.markAsRead = this.markAsRead.bind(this);
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return nextProps.length > this.props.listNotifications.length;
   }
 
   markAsRead(id) {
@@ -96,5 +72,4 @@ Notifications.defaultProps = {
   listNotifications: [],
 };
 
->>>>>>> ccc96e14bc929f7a8059cc6a3822d9630a797fc1
 export default Notifications;
